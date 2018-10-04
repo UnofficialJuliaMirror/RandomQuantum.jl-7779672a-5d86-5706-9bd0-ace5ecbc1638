@@ -61,7 +61,7 @@ See, e.g., Zyczkowski et al., [J. Math. Phys. 52, 062201
 (2011)](http://dx.doi.org/10.1063/1.3595693)
 [arXiv:1010.3570](http://arxiv.org/abs/1010.3570).
 """
-type FubiniStudyMixedState
+mutable struct FubiniStudyMixedState
     dim::Int64
     bath_dim::Int64
 end
