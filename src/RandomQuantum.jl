@@ -25,7 +25,7 @@ RandomQuantum.GinibreEnsemble(rows,cols)
 Type corresponding to the Ginibre distribution
 of complex matrices.
 """
-type GinibreEnsemble
+mutable struct GinibreEnsemble
     rows::Int64
     cols::Int64
 end
@@ -42,7 +42,7 @@ RandomQuantum.FubiniStudyPureState(dim)
 Type corresponding to unitarily-invariant distribution
 of pure states for some Hilbert space dimension.
 """
-type FubiniStudyPureState
+mutable struct FubiniStudyPureState
     dim::Int64
 end
 
@@ -50,13 +50,13 @@ function rand(dist::FubiniStudyPureState)
     return normalize( vec(rand(GinibreEnsemble(dist.dim,1))) )
 end
 
-""" 
+"""
 RandomQuantum.FubiniStudyMixedState(dim, bath_dim)
 
 Type corresponding to distribution of mixed states obtained by
 tracing out part of a pure state obtained from a FubiniStudy
 distribution. When `dim == bath_dim`, this is identical to the
-Hilbert-Schmidt distribution of mixed states. 
+Hilbert-Schmidt distribution of mixed states.
 See, e.g., Zyczkowski et al., [J. Math. Phys. 52, 062201
 (2011)](http://dx.doi.org/10.1063/1.3595693)
 [arXiv:1010.3570](http://arxiv.org/abs/1010.3570).
@@ -82,7 +82,7 @@ See, e.g., Zyczkowski et al., [J. Math. Phys. 52, 062201
 (2011)](http://dx.doi.org/10.1063/1.3595693)
 [arXiv:1010.3570](http://arxiv.org/abs/1010.3570).
 """
-type HilbertSchmidtMixedState
+mutable struct HilbertSchmidtMixedState
     dim::Int64
 end
 
@@ -92,16 +92,16 @@ function rand(dist::HilbertSchmidtMixedState)
     return M/trace(M)
 end
 
-""" 
+"""
 RandomQuantum.BuresMixedState(dim)
 
 Type corresponding to distribution of mixed states according to the
-Bures metric. 
+Bures metric.
 See, e.g., Zyczkowski et al., [J. Math. Phys. 52, 062201
 (2011)](http://dx.doi.org/10.1063/1.3595693)
 [arXiv:1010.3570](http://arxiv.org/abs/1010.3570).
 """
-type BuresMixedState
+mutable struct BuresMixedState
     dim::Int64
 end
 
@@ -112,7 +112,7 @@ function rand(dist::BuresMixedState)
     return H*H'/trace(H*H')
 end
 
-""" 
+"""
 RandomQuantum.ClosedHaarEnsemble(dim)
 
 Type corresponding to the unitarily invariant distribution of unitary
@@ -120,8 +120,8 @@ transformations for some Hilbert space dimension.  See, e.g.,
 Mezzadri, [Notices Amer Math Soc 54 4 592
 (2007)](http://www.ams.org/notices/200705/fea-mezzadri-web.pdf).
 """
-type ClosedHaarEnsemble
-    dim::Int64 
+mutable struct ClosedHaarEnsemble
+    dim::Int64
 end
 
 function rand(dist::ClosedHaarEnsemble)
@@ -143,7 +143,7 @@ See, e.g., Bruzda et al., [Phys. Lett. A 373, 320-324
 (2009)](http://dx.doi.org/10.1016/j.physleta.2008.11.043),
 [arXiv:0804.2361](http://arxiv.org/abs/0804.2361).
 """
-type OpenHaarEnsemble
+mutable struct OpenHaarEnsemble
     dim::Int64
     bath_dim::Int64
 end
@@ -164,9 +164,9 @@ end
 RandomQuantum.GUE(dim)
 
 Type corresponding to the Gaussian Unitary Ensemble of complex
-matrices.  
+matrices.
 """
-type GUE 
+mutable struct GUE
     size::Int64
 end
 
@@ -181,7 +181,7 @@ RandomQuantum.RandomClosedEvolution(dim, α)
 Type corresponding to the integrated evolution of random Hamiltonians
 (with unitarily invariant distribution) on some Hilbert space.
 """
-type RandomClosedEvolution
+mutable struct RandomClosedEvolution
     dim::Int64
     α::Float64
 end
@@ -203,7 +203,7 @@ Hamiltonians (with unitarily invariant distribution) on a
 dimensional Hilbert space, such that bath (initially in the ground
 state) is traced out after the evolution.
 """
-type RandomOpenEvolution
+mutable struct RandomOpenEvolution
     dim::Int64
     bath_dim::Int64
     α::Float64
